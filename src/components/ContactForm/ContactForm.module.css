@@ -1,0 +1,304 @@
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.815);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  animation: overlayIn 0.3s ease;
+}
+
+.overlay {
+  position: relative;
+}
+
+.allContact {
+  display: inline-block;
+  margin-right: 30px;
+  margin-top: 16px;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.form {
+  position: relative;
+  border-radius: 0.6em;
+  border: 2px solid orange;
+  width: 6.8em;
+  max-height: 2.8em;
+  overflow: hidden;
+  animation: formToModal 0.3s ease-out forwards;
+
+  &:hover {
+    background-color: lightgreen;
+  }
+}
+
+.form-exit {
+}
+
+.formModal {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16em;
+  background-color: beige;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 1em;
+  padding: 1.5em;
+  pointer-events: auto;
+  animation: modalIn 0.3s ease-out forwards;
+
+  @media screen and (min-width: 768px) {
+    width: 20em;
+  }
+}
+
+.formModal-exit {
+  animation: modalOut 0.3s ease-in forwards;
+}
+
+.wrap {
+  display: flex;
+  width: 100%;
+  position: relative;
+  flex-direction: column;
+}
+
+.label {
+  text-align: start;
+}
+
+.field {
+  display: block;
+  max-width: 100%;
+  margin-bottom: 1.8em;
+  padding: 0.6em 0.8em;
+  border: 2px solid #ccc;
+  border-radius: 0.4em;
+  font-size: 1em;
+  position: relative;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: black;
+  border: none;
+  padding: 0.4em 1em;
+  border: 1px solid black;
+  border-radius: 0.5em;
+  font-size: 1em;
+  line-height: 1em;
+  width: 6em;
+  cursor: pointer;
+  scale: 1;
+  transition: background-color 0.3s ease, scale 0.3s ease;
+  margin: 0.8em auto;
+}
+
+.btn:hover {
+  background-color: lightgreen;
+  scale: 1.1;
+}
+
+.addWrap {
+  display: flex;
+  padding-top: 8px;
+  margin-bottom: 20px;
+  margin-right: 40px;
+  align-items: center;
+}
+
+.addNew {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.addIcons {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1.8em;
+  margin: 0 0.4em;
+}
+
+.error {
+  position: absolute;
+  text-align: center;
+  top: 4.8em;
+  left: 0;
+  font-size: 0.85em;
+  color: red;
+  padding-left: 0.2em;
+}
+
+.clearIcon {
+  position: absolute;
+  right: 0.4em;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: red;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btnClose {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  width: 24px;
+  border: none;
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &:hover .iconClose {
+    color: red;
+  }
+}
+
+.iconClose {
+  width: 16px;
+  color: black;
+  opacity: 0.7;
+}
+
+@keyframes modalIn {
+  0% {
+    top: 50%;
+    left: 50%;
+    opacity: 0.2;
+    transform: translate(-100%, -100%) scale(0.2);
+  }
+  25% {
+    top: 35%;
+    left: 35%;
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  50% {
+    top: 40%;
+    left: 40%;
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  75% {
+    top: 45%;
+    left: 45%;
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes modalOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-45%, -45%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-35%, -35%) scale(0.8);
+  }
+  75% {
+    opacity: 0;
+    transform: translate(-30%, -30%) scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-25%, -25%) scale(0.2);
+  }
+}
+
+.formModal {
+  animation: modalIn 0.3s ease-out forwards;
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes formToModal {
+  from {
+    position: absolute;
+    width: 20em;
+    max-height: 20em;
+    opacity: 1;
+  }
+  to {
+    position: absolute;
+    top: 14px;
+    width: 6.8em;
+    max-height: 2.8em;
+    opacity: 1;
+  }
+}
+
+.alert-red:hover {
+  background-color: rgba(255, 0, 0, 0.87);
+  color: white;
+}
+
+.alert-green:hover {
+  background-color: rgba(42, 230, 35, 0.87);
+  color: black;
+}
+
+.modal-overlay-exit {
+  position: relative;
+  animation: overlayOut 0.3s ease forwards;
+}
+
+@keyframes overlayOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
