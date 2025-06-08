@@ -1,0 +1,40 @@
+.link {
+  position: relative;
+  color: blueviolet;
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 16px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: lightsalmon;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover,
+  &:focus {
+    color: transparent;
+    background-image: linear-gradient(to right, violet, lightsalmon);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &:hover::after,
+  &:focus::after,
+  &.active::after {
+    width: 100%;
+  }
+}
+
+.active {
+  color: lightsalmon;
+}

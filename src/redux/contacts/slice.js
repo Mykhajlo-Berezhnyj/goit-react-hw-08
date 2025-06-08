@@ -4,10 +4,11 @@ import {
   addContact,
   deleteContact,
   updateContact,
-} from './contactsOps';
-import { selectNameFilter, selectModeFilter } from './filtersSlice';
-import { normalize } from '../components/utils/normalize';
-
+} from './operations';
+import { selectNameFilter, selectModeFilter } from '../filters/selectors';
+import { normalize } from '../../components/utils/normalize';
+import { selectContacts } from './selectors';
+import { logOut } from '../auth/operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -26,7 +27,7 @@ const contactSlice = createSlice({
     isLoading: false,
     error: null,
   },
-   reducers: {
+  reducers: {
     startEditing(state, action) {
       state.editingContactId = action.payload;
     },
@@ -68,23 +69,17 @@ const contactSlice = createSlice({
           contact.number = number;
         }
       })
-      .addCase(updateContact.rejected, handleRejected);
+      .addCase(updateContact.rejected, handleRejected)
+      .addCase(logOut.fulfilled, state => {
+        state.items = [];
+        state.error = null;
+      });
   },
 });
 
 export default contactSlice.reducer;
 
-export const {startEditing, stopEditing} = contactSlice.actions;
-
-// Selectors
-
-export const selectContacts = state => state.contacts.items;
-
-export const selectIsLoading = state => state.contacts.isLoading;
-
-export const selectError = state => state.contacts.error;
-
-export const selectEditingContactId = state => state.contacts.editingContactId;
+export const { startEditing, stopEditing } = contactSlice.actions;
 
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter, selectModeFilter],
@@ -110,5 +105,3 @@ export const selectFilteredContacts = createSelector(
     });
   },
 );
-
-

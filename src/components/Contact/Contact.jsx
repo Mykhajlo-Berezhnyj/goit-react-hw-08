@@ -1,15 +1,15 @@
 import { FaUser, FaPhone, FaEdit } from 'react-icons/fa';
 import css from './Contact.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { startEditing, stopEditing } from '../../redux/contactsSlice';
-import { deleteContact, updateContact } from '../../redux/contactsOps';
+import { startEditing, stopEditing } from '../../redux/contacts/slice';
+import { deleteContact, updateContact } from '../../redux/contacts/operations';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState, useRef } from 'react';
 import { validationContact } from '../utils/validationContact';
 import { FaCheck } from 'react-icons/fa';
 import { findDuplicateByNumber } from '../findDuplicateByNumber';
-import { selectEditingContactId } from '../../redux/contactsSlice';
+import { selectEditingContactId } from '../../redux/contacts/selectors';
 import { FaTimes } from 'react-icons/fa';
 
 export default function Contact({ contact }) {

@@ -1,0 +1,101 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 450px;
+  /* margin: 10px auto; */
+  padding: 24px;
+  border-radius: 20px;
+  border: 2px solid lightgreen;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.field {
+  padding: 8px 12px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+
+  &:focus {
+    border-color: blue;
+    box-shadow: 0 0 8px blue;
+    outline: none;
+  }
+}
+
+.field {
+  outline: none;
+  border: 2px solid blue;
+  box-shadow: 0 0 8px blue;
+}
+
+.fieldError {
+  border: 2px solid red;
+  box-shadow: 0 0 4px rgba(211, 47, 47, 0.5);
+
+  &:focus {
+    border: 2px solid red;
+    box-shadow: 0 0 4px rgba(211, 47, 47, 0.5);
+  }
+}
+
+.fieldValid {
+  border: 2px solid lightgreen;
+  box-shadow: 0 0 8px lightgreen;
+
+  &:focus {
+    border: 2px solid lightgreen;
+    box-shadow: 0 0 8px lightgreen;
+  }
+}
+
+.error {
+  position: absolute;
+  text-align: center;
+  top: 62px;
+  left: 0.4em;
+  font-size: 0.74em;
+  color: red;
+  padding-left: 0.2em;
+}
+
+button {
+  width: 90%;
+  padding: 0.75rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  border: 2px solid lightgreen;
+  box-shadow: 4px 4px 10px lightgreen;
+  color: rgb(18, 184, 18);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+
+  &:hover:not(:disabled) {
+    background-color: lightgreen;
+    color: blue;
+    box-shadow: 4px 4px 10px blue;
+    scale: 1.1;
+  }
+
+  &:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+}

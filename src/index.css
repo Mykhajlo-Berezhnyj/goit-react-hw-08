@@ -34,7 +34,7 @@ button {
   padding: 0;
   border: none;
   font: inherit;
-  color: inherit;
+  /* color: inherit; */
   background-color: transparent;
   cursor: pointer;
 }
@@ -62,7 +62,8 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }

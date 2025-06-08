@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.username {
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.user {
+  color: brown;
+  text-align: center;
+}
+
+.btnLogOut {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  color: blue;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    border: 1px solid blueviolet;
+    background-color: rgba(231, 35, 35, 0.829);
+    color: beige;
+    font-weight: 600;
+  }
+}

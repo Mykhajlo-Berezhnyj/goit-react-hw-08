@@ -1,0 +1,49 @@
+.nav {
+  display: flex;
+  gap: 10px;
+}
+
+.link {
+  position: relative;
+  color: blueviolet;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: lightsalmon;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover,
+  &:focus {
+    color: transparent;
+    background-image: linear-gradient(to right, violet, orangered);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &.active {
+    color: orangered;
+  }
+
+  &.active::after {
+    transform: scaleX(1);
+  }
+
+  &:hover::after,
+  &:focus::after {
+    width: 100%;
+  }
+}

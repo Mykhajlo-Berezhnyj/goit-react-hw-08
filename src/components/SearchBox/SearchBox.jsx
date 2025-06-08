@@ -1,6 +1,6 @@
 import css from './SearchBox.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter, changeFilterMode } from '../../redux/filtersSlice';
+import { changeFilter, changeFilterMode } from '../../redux/filters/slice';
 import { useDebouncedCallback } from 'use-debounce';
 import { useEffect } from 'react';
 
