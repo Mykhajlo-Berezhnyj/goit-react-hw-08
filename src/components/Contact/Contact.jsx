@@ -77,7 +77,7 @@ export default function Contact({ contact }) {
               toast.success(
                 <>
                   <FaTrash style={{ marginRight: 8 }} />
-                  Contact updated!
+                  Contact delete!
                 </>,
               );
             } catch (error) {
