@@ -11,6 +11,7 @@ import { FaCheck } from 'react-icons/fa';
 import { findDuplicateByNumber } from '../findDuplicateByNumber';
 import { selectEditingContactId } from '../../redux/contacts/selectors';
 import { FaTimes } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 export default function Contact({ contact }) {
   const dispatch = useDispatch();
@@ -70,7 +71,10 @@ export default function Contact({ contact }) {
         {
           label: 'Yes',
           className: css['alert-red'],
-          onClick: () => dispatch(deleteContact(contact.id)),
+          onClick: () => {
+            dispatch(deleteContact(contact.id));
+            toast.success('Contact has deleted!');
+          },
         },
         {
           label: 'No',
@@ -140,6 +144,7 @@ export default function Contact({ contact }) {
                 }),
               );
               dispatch(stopEditing());
+              toast.success('Contact updated and duplicate removed.');
             },
           },
           {
@@ -147,6 +152,7 @@ export default function Contact({ contact }) {
             onClick: () => {
               dispatch(deleteContact(contact.id));
               dispatch(stopEditing());
+              toast.success('Duplicate contact was deleted.');
             },
           },
           {
@@ -165,6 +171,7 @@ export default function Contact({ contact }) {
       }),
     );
     dispatch(stopEditing());
+    toast.success('Contact was edited.');
   };
 
   const handleCancel = () => {
@@ -216,14 +223,15 @@ export default function Contact({ contact }) {
               )}{' '}
             </div>
           ) : (
-            <p
+            <span
+              title="DoubleClick for edit"
               className={css['contact-data']}
               onDoubleClick={evt => handleEditing(evt, 'name')}
             >
               <span className={css['scrolling-text']}>
                 {editingContactId === contact.id ? editName : contact.name}
               </span>
-            </p>
+            </span>
           )}
           {!(editingContactId === contact.id && focusedField === 'name') && (
             <FaEdit
@@ -263,12 +271,13 @@ export default function Contact({ contact }) {
               )}
             </div>
           ) : (
-            <p
+            <span
+              title="DoubleClick for edit"
               className={css['contact-data']}
               onDoubleClick={evt => handleEditing(evt, 'number')}
             >
               {editingContactId === contact.id ? editNumber : contact.number}
-            </p>
+            </span>
           )}
           {!(editingContactId === contact.id && focusedField === 'number') && (
             <FaEdit

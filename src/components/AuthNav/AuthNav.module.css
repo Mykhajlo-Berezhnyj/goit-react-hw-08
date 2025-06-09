@@ -1,9 +1,20 @@
+.nav {
+  display: flex;
+  gap: 10px;
+}
+
 .link {
   position: relative;
-  color: blueviolet;
+  background-image: linear-gradient(to left, violet, blue);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to left, violet, blue);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-decoration: none;
   font-weight: 600;
-  margin-right: 16px;
   padding: 6px 12px;
   border-radius: 6px;
   transition: background-color 0.2s ease-in-out;
@@ -14,27 +25,42 @@
     bottom: 0;
     left: 0;
     height: 2px;
-    width: 0%;
-    background-color: lightsalmon;
-    transition: width 0.3s ease-in-out;
+    width: 100%;
+    background-color: violet;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
   }
 
   &:hover,
   &:focus {
     color: transparent;
-    background-image: linear-gradient(to right, violet, lightsalmon);
+    background-image: linear-gradient(to right, violet, blue);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &.active {
+    background-image: linear-gradient(to right, violet, blue);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &.active::after {
+    transform: scaleX(1);
+  }
+
+  &.active:hover {
+    background-image: linear-gradient(to left, violet, blue);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   &:hover::after,
-  &:focus::after,
-  &.active::after {
-    width: 100%;
+  &:focus::after {
+    transform: scaleX(1);
   }
-}
-
-.active {
-  color: lightsalmon;
 }

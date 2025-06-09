@@ -5,7 +5,10 @@
 
 .link {
   position: relative;
-  color: blueviolet;
+  background-image: linear-gradient(to left, violet, blue);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-decoration: none;
   font-weight: 600;
   padding: 6px 12px;
@@ -19,7 +22,7 @@
     left: 0;
     height: 2px;
     width: 100%;
-    background-color: lightsalmon;
+    background-color: violet;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -28,22 +31,32 @@
   &:hover,
   &:focus {
     color: transparent;
-    background-image: linear-gradient(to right, violet, orangered);
+    background-image: linear-gradient(to right, violet, blue);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   &.active {
-    color: orangered;
+    background-image: linear-gradient(to right, violet, blue);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   &.active::after {
     transform: scaleX(1);
   }
 
+  &.active:hover {
+    background-image: linear-gradient(to left, violet, blue);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   &:hover::after,
   &:focus::after {
-    width: 100%;
+    transform: scaleX(1);
   }
 }

@@ -157,7 +157,7 @@ export default function RegistrationForm() {
               )}
             </Field>
           </label>
-          <button type="submit" className={css.btn} disabled={isSubmitting}>
+          <button type="submit" className={css.btnReg} disabled={isSubmitting}>
             {isSubmitting ? 'Registering...' : 'Register'}
           </button>
         </Form>

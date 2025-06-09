@@ -29,15 +29,22 @@
   font-size: 14px;
   font-weight: 500;
   border-radius: 8px;
-  color: blue;
+  background-image: linear-gradient(to left, blue, orangered);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 
   &:hover,
   &:focus {
-    border: 1px solid blueviolet;
-    background-color: rgba(231, 35, 35, 0.829);
+    background-image: none;
+    -webkit-background-clip: border-box;
+    -webkit-text-fill-color: unset;
+    background-color: rgba(231, 35, 35, 0.9);
     color: beige;
     font-weight: 600;
+    border: 1px solid blueviolet;
+    scale: 1.05;
   }
 }

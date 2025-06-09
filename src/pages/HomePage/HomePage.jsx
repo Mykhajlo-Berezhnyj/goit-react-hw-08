@@ -1,4 +1,5 @@
 import css from './HomePage.module.css';
+import { WelcomeMessage } from '../../components/WelcomeMessage/WelcomeMessage';
 
 export default function HomePage() {
   return (
@@ -6,12 +7,7 @@ export default function HomePage() {
       <title>Welcome to Phonebook 📞</title>
       <div className={css.container}>
         <h1 className={css.title}>Welcome to Phonebook 📞</h1>
-        <p className={css.text}>
-          Save your contacts securely. Register or log in to get started.
-          <span role="img" aria-label="Greeting icon">
-            💁‍♀️
-          </span>
-        </p>
+        <WelcomeMessage className={css.text} />
       </div>
     </>
   );

@@ -78,6 +78,12 @@ export default function ContactForm() {
           number: values.number,
         }),
       );
+      toast.success(
+        <>
+          <FaUserPlus />
+          Contact added!
+        </>,
+      );
       actions.resetForm();
       handleCloseModal();
     } else if (existinContact.name !== values.name) {
@@ -96,7 +102,13 @@ export default function ContactForm() {
                   number: values.number,
                 }),
               ),
-                handleCloseModal();
+                toast.success(
+                  <>
+                    <FaEdit style={{ marginRight: 8 }} />
+                    Contact updated!
+                  </>,
+                );
+              handleCloseModal();
             },
           },
           {

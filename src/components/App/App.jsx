@@ -1,4 +1,3 @@
-import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
@@ -8,7 +7,8 @@ import { selectIsRefreshing } from '../../redux/auth/selectors';
 import { refreshUser } from '../../redux/auth/operations';
 import { Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
-import css from './App.module.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import './App.css';
 import { RestrictedRoute } from '../RestrictedRoute.jsx';
 import { PrivateRoute } from '../PrivateRoute.jsx';
 
@@ -32,8 +32,8 @@ function App() {
   return isRefreshing ? (
     <strong>Refreshing user...</strong>
   ) : (
-    <div className={css.container}>
-      <Toaster position="top-left" />
+    <div className="container1">
+      <Toaster position="top-center" />
       <AppBar />
       <Suspense fallback={null}>
         <Routes>

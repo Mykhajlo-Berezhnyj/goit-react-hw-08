@@ -13,7 +13,7 @@ const handleRejected = (state, action) => {
 
 const handleLogIn = (state, action) => {
   state.isLoading = false;
-  state.error = false;
+  state.error = null;
   state.user = action.payload.user;
   state.token = action.payload.token;
   state.isLoggedIn = true;
@@ -21,7 +21,7 @@ const handleLogIn = (state, action) => {
 
 const handleLogOut = (state, action) => {
   state.isLoading = false;
-  state.error = false;
+  state.error = null;
   state.user = { name: null, email: null };
   state.token = null;
   state.isLoggedIn = false;
