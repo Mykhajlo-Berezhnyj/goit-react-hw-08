@@ -19,7 +19,7 @@ const handleLogIn = (state, action) => {
   state.isLoggedIn = true;
 };
 
-const handleLogOut = (state, action) => {
+const handleLogOut = (state) => {
   state.isLoading = false;
   state.error = null;
   state.user = { name: null, email: null };
@@ -28,6 +28,8 @@ const handleLogOut = (state, action) => {
 };
 
 const handleRefreshing = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
   state.user = action.payload;
   state.isLoggedIn = true;
   state.isRefreshing = false;

@@ -5,17 +5,14 @@
 
 .link {
   position: relative;
-  background-image: linear-gradient(to left, violet, blue);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to left, violet, blue);
+   background-image: linear-gradient(to right, tomato, blueviolet, deeppink, tomato );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 6px;
+  margin: 0 6px;
   border-radius: 6px;
   transition: background-color 0.2s ease-in-out;
 
@@ -26,7 +23,7 @@
     left: 0;
     height: 2px;
     width: 100%;
-    background-color: violet;
+    background-color: rgba(255, 68, 0, 0.788);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -35,14 +32,14 @@
   &:hover,
   &:focus {
     color: transparent;
-    background-image: linear-gradient(to right, violet, blue);
+     background-image: linear-gradient(to left, tomato, blueviolet, deeppink, tomato );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   &.active {
-    background-image: linear-gradient(to right, violet, blue);
+    background-image: linear-gradient(to right, tomato, blueviolet, deeppink, tomato );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -53,7 +50,7 @@
   }
 
   &.active:hover {
-    background-image: linear-gradient(to left, violet, blue);
+    background-image: linear-gradient(to left, tomato, blueviolet, deeppink, tomato );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

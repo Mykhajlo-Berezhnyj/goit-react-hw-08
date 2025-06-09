@@ -7,11 +7,11 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState, useRef } from 'react';
 import { validationContact } from '../utils/validationContact';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaTimes, FaSave, FaUndo, FaTrash } from 'react-icons/fa';
 import { findDuplicateByNumber } from '../findDuplicateByNumber';
 import { selectEditingContactId } from '../../redux/contacts/selectors';
-import { FaTimes } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import { showError } from '../utils/showError';
 
 export default function Contact({ contact }) {
   const dispatch = useDispatch();
@@ -71,9 +71,20 @@ export default function Contact({ contact }) {
         {
           label: 'Yes',
           className: css['alert-red'],
-          onClick: () => {
-            dispatch(deleteContact(contact.id));
-            toast.success('Contact has deleted!');
+          onClick: async () => {
+            try {
+              await dispatch(deleteContact(contact.id)).unwrap();
+              toast.success(
+                <>
+                  <FaTrash style={{ marginRight: 8 }} />
+                  Contact updated!
+                </>,
+              );
+            } catch (error) {
+              toast.error(
+                `Failed to delete contact: ${error.message || 'Unknown error'}`,
+              );
+            }
           },
         },
         {
@@ -108,7 +119,7 @@ export default function Contact({ contact }) {
     }
   }, [editingContactId, contact.id, focusedField]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const validationErrors = validationContact({
       name: editName,
       number: editNumber,
@@ -134,44 +145,74 @@ export default function Contact({ contact }) {
         buttons: [
           {
             label: 'Keep current, delete old',
-            onClick: () => {
-              dispatch(deleteContact(duplicate.id));
-              dispatch(
-                updateContact({
-                  contactId: contact.id,
-                  name: editName.trim(),
-                  number: editNumber.trim(),
-                }),
-              );
-              dispatch(stopEditing());
-              toast.success('Contact updated and duplicate removed.');
+             className: css['alert-red'],
+            onClick: async () => {
+              try {
+                await dispatch(deleteContact(duplicate.id));
+                  await dispatch(
+                    updateContact({
+                      contactId: contact.id,
+                      name: editName.trim(),
+                      number: editNumber.trim(),
+                    })).unwrap();
+                dispatch(stopEditing());
+                toast.success(
+                  <>
+                    <FaEdit style={{ marginRight: 8 }} />
+                    Contact updated and duplicate removed!
+                  </>,
+                );
+              } catch (error) {
+                showError('update contact', error);
+              }
             },
           },
           {
             label: 'Keep old, delete current',
-            onClick: () => {
-              dispatch(deleteContact(contact.id));
-              dispatch(stopEditing());
-              toast.success('Duplicate contact was deleted.');
+             className: css['alert-red'],
+            onClick: async () => {
+              try {
+                await dispatch(deleteContact(contact.id)).unwrap();
+                 dispatch(stopEditing());
+                toast.success(
+                  <>
+                    <FaTrash style={{ marginRight: 8 }} />
+                    Duplicate contact was deleted!
+                  </>,
+                );
+              } catch (error) {
+                  showError('update contact', error);
+              }
             },
           },
           {
             label: 'Cancel, return editing',
+             className: css['alert-green'],
           },
         ],
       });
       return;
     }
-
-    dispatch(
+try {
+  await dispatch(
       updateContact({
         contactId: contact.id,
         name: editName.trim(),
         number: editNumber.trim(),
       }),
-    );
+    ).unwrap();    
     dispatch(stopEditing());
-    toast.success('Contact was edited.');
+    toast.success(
+                  <>
+                    <FaEdit style={{ marginRight: 8 }} />
+                    Contact updated!
+                  </>,
+                );
+} catch (error) {
+   showError('update contact', error);
+}
+    
+
   };
 
   const handleCancel = () => {
@@ -297,6 +338,8 @@ export default function Contact({ contact }) {
             onClick={handleSave}
             disabled={!!error.name || !!error.number}
           >
+            {' '}
+            <FaSave className={css.btnIcon} />
             Save
           </button>
           <button
@@ -305,16 +348,22 @@ export default function Contact({ contact }) {
             aria-label="cancel edit contact"
             onClick={handleCancel}
           >
+            {' '}
+            <FaUndo className={css.btnIcon} />
             Cancel
           </button>
         </div>
       ) : (
         <button
           type="button"
+          title="Delete"
+          aria-label="Delete contact"
           className={css['btn-delete']}
           onClick={handleDelete}
         >
-          Delete
+          {' '}
+          <FaTrash className={css.btnIcon} />
+          Del
         </button>
       )}
     </div>

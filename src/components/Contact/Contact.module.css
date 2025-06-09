@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  width: 260px;
+  width: 294px;
   justify-content: space-between;
   background-color: beige;
   padding: 0.6em;
@@ -11,25 +11,38 @@
   border: 1px solid black;
   box-shadow: 7px -3px 4px 2px rgba(245, 245, 220, 0.048);
 }
+
 .container-wrap {
   display: flex;
   flex-direction: column;
   gap: 0.6em;
   flex-wrap: wrap;
   flex-shrink: 1;
+  margin-right: 4px;
 }
+
 .contact-item {
   display: flex;
   align-items: center;
   gap: 0.6em;
   cursor: pointer;
   flex-wrap: nowrap;
-  width: 180px;
+  width: 210px;
 }
+
 .icon {
   color: black;
   flex-shrink: 0;
+
+  &:hover {
+    scale: 1.2;
+  }
+  &:hover .contact-data {
+    padding-left: 8px;
+    scale: 1.1;
+  }
 }
+
 .contact-data {
   display: block;
   margin: 0;
@@ -41,6 +54,11 @@
   white-space: nowrap;
   max-width: 100%;
   position: relative;
+
+  &:hover {
+    padding-left: 8px;
+    scale: 1.1;
+  }
 
   &:hover .scrolling-text {
     animation: marquee 4s linear infinite;
@@ -64,10 +82,12 @@
   scale: 1;
 }
 .btn-delete {
+  flex-direction: column;
   flex-shrink: 0;
   margin-left: auto;
   padding: 4px;
 }
+
 .btn-delete:hover,
 .btn-cancel:hover {
   background-color: #e05656;
@@ -137,6 +157,7 @@
 .contact-item:hover .editIcon {
   pointer-events: auto;
 }
+
 .btnEdit {
   display: flex;
   justify-content: center;
@@ -144,21 +165,29 @@
   margin-top: 20px;
   margin-left: 50px;
 }
+
+.btnIcon {
+  margin-right: 4px;
+}
+
 .btnSaveEdit:disabled {
   background-color: #ccc;
   color: #666;
   cursor: not-allowed;
   opacity: 0.6;
 }
+
 .validIcon {
   color: rgb(13, 216, 13);
   margin-left: 4px;
   font-size: 1em;
 }
+
 .alert-red:hover {
   background-color: rgba(255, 0, 0, 0.87);
   color: white;
 }
+
 .alert-green:hover {
   background-color: rgba(42, 230, 35, 0.87);
   color: black;

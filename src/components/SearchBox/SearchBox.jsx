@@ -2,10 +2,11 @@ import css from './SearchBox.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter, changeFilterMode } from '../../redux/filters/slice';
 import { useDebouncedCallback } from 'use-debounce';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SearchBox() {
   const dispatch = useDispatch();
+  const [searchValue, setSearchValue] = useState('');
   const { name, mode } = useSelector(state => state.filters);
 
   const debounceChangeFilter = useDebouncedCallback(value => {
@@ -29,8 +30,8 @@ export default function SearchBox() {
           className={css['search-input']}
           aria-label="field search contact"
           type="text"
-          value={name}
-          onChange={evt => debounceChangeFilter(evt.target.value)}
+          value={searchValue}
+          onChange={evt => {setSearchValue(evt.target.value);debounceChangeFilter(evt.target.value)}}
         />
         <select
           name="filter"

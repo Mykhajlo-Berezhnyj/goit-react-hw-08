@@ -1,6 +1,5 @@
 import { useId, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
-import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import css from './ContactForm.module.css';
@@ -10,8 +9,8 @@ import { useSelector } from 'react-redux';
 import { confirmAlert } from 'react-confirm-alert';
 import { toast } from 'react-hot-toast';
 import { findDuplicateByNumber } from '../findDuplicateByNumber';
-import { FaUserPlus, FaTimes } from 'react-icons/fa';
-// import 'yup-phone-lite';
+import { FaUserPlus, FaTimes, FaEdit } from 'react-icons/fa';
+import { showError } from '../utils/showError';
 
 const initialValues = {
   name: '',
@@ -68,16 +67,16 @@ export default function ContactForm() {
     }
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     const existinContact = findDuplicateByNumber(contacts, values.number, null);
 
     if (!existinContact) {
-      dispatch(
+       try { await dispatch(
         addContact({
           name: values.name,
           number: values.number,
-        }),
-      );
+        })
+      ).unwrap();
       toast.success(
         <>
           <FaUserPlus />
@@ -86,6 +85,9 @@ export default function ContactForm() {
       );
       actions.resetForm();
       handleCloseModal();
+       } catch (error) {
+         showError('add contact', error);
+       }
     } else if (existinContact.name !== values.name) {
       confirmAlert({
         title: 'Confirm Update contact',
@@ -94,21 +96,26 @@ export default function ContactForm() {
           {
             label: 'Yes',
             className: css['alert-green'],
-            onClick: () => {
-              dispatch(
-                updateContact({
-                  id: existinContact.id,
-                  name: values.name,
-                  number: values.number,
-                }),
-              ),
+            onClick: async () => {
+              try {
+                await dispatch(
+                  updateContact({
+                    contactId: existinContact.id,
+                    name: values.name.trim(),
+                    number: values.number.trim(),
+                  }),
+                ).unwrap();
                 toast.success(
                   <>
                     <FaEdit style={{ marginRight: 8 }} />
                     Contact updated!
                   </>,
                 );
-              handleCloseModal();
+                actions.resetForm();
+                handleCloseModal();
+              } catch (error) {
+                showError('update contact', error);
+              }
             },
           },
           {
@@ -118,7 +125,7 @@ export default function ContactForm() {
         ],
       });
     } else {
-      toast.error(
+      showError.error('update contact',
         `Contact with this number and ${existinContact.name} already exists: `,
       );
     }

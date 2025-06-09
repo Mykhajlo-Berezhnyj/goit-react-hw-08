@@ -1,6 +1,7 @@
 import css from './ContactList.module.css';
 import Contact from '../Contact/Contact';
 import { useSelector } from 'react-redux';
+import { Loader } from '../Loader/Loader';
 import { selectIsLoading, selectError } from '../../redux/contacts/selectors';
 import { selectFilteredContacts } from '../../redux/contacts/slice';
 
@@ -11,7 +12,7 @@ export default function ContactList() {
 
   return (
     <div>
-      {isLoading && <p>Loading</p>}
+      {isLoading && <p>Loader</p>}
       {error && <p>error</p>}
       {filteredContacts.length > 0 ? (
         <p className={css.infoQuery}>

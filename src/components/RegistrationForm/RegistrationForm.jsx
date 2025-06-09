@@ -3,7 +3,7 @@ import { register } from '../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import css from './RegistrationForm.module.css';
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
